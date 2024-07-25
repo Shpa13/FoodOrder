@@ -1,5 +1,5 @@
 import Button from "@/src/components/Button";
-import { View, Text, StyleSheet, TextInput, Image } from "react-native";
+import { View, Text, StyleSheet, TextInput, Image, Alert } from "react-native";
 import { useState } from "react";
 import { defaultPizzaImage } from "@/src/components/ProductListItem";
 import Colors from "@/src/constants/Colors";
@@ -84,6 +84,26 @@ const CreateProductScreen = () => {
     }
   };
 
+  const onDelete = () => {
+    console.warn("confirm delete");
+  };
+  const confirmDelete = () => {
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to delete the product?",
+      [
+        {
+          text: "Cancel",
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: onDelete,
+        },
+      ]
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -97,7 +117,7 @@ const CreateProductScreen = () => {
         style={styles.image}
       />
       <Text onPress={pickImage} style={styles.textButton}>
-        Slect Image
+        Select Image
       </Text>
 
       <Text style={styles.label}>Name</Text>
@@ -118,6 +138,11 @@ const CreateProductScreen = () => {
       />
       <Text style={{ color: "red" }}>{errors}</Text>
       <Button onPress={onSubmit} text={isUpdating ? "Update" : "Create"} />
+      {isUpdating && (
+        <Text onPress={confirmDelete} style={styles.textButton}>
+          Delete
+        </Text>
+      )}
     </View>
   );
 };
