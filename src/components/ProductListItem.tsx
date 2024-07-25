@@ -6,9 +6,11 @@ import { Link } from "expo-router";
 export const defaultPizzaImage =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png";
 
+// creating a type safe item
 type ProductListItemProps = {
   product: Product;
 };
+
 const ProductListItem = ({ product }: ProductListItemProps) => {
   console.log(product);
   return (
